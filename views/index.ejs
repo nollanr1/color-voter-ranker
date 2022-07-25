@@ -20,8 +20,10 @@
 			<button type="submit">Choose this color</button>
 		</form>
 		<ul class="colorCodes">
+		<!--Normally inline CSS is bad but here I'd argue that the color is content.-->
 		<% for(let i=0; i < info.length; i++) {%>
 			<li class="colorCode">
+				<span class="colorBox" style="color: <%= info[i].color %>;">&#x25fc;</span>
 				<span><%= info[i].color %></span>
 				<span><%= info[i].votes %></span>
 				<span>Vote for this color</span>
