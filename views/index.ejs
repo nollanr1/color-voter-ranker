@@ -16,9 +16,18 @@
 	<body>
 		<h1>Under Construction</h1>
 		<form action="/newcolor" method="POST">
-			<input type="text" placeholder="color" name="color">
+			<input type="color" placeholder="color" name="color">
 			<button type="submit">Choose this color</button>
 		</form>
+		<ul class="colorCodes">
+		<% for(let i=0; i < info.length; i++) {%>
+			<li class="colorCode">
+				<span><%= info[i].color %></span>
+				<span><%= info[i].votes %></span>
+				<span>Vote for this color</span>
+			</li>
+		<% } %>
+		</ul>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
