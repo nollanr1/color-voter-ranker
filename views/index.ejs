@@ -26,7 +26,11 @@
 				<span class="colorBox" style="color: <%= info[i].color %>;">&#x25fc;</span>
 				<span><%= info[i].color %></span>
 				<span><%= info[i].votes %></span>
-				<span>Vote for this color</span>
+				<span class="voteButton">Vote for this color</span>
+				<% if(Math.ceil(Math.random()*1)==1) {%>
+					<!--The *1 is a placeholder for actual odds, normally I'd do 300 or so-->
+					<span class="deleteButton">If you want, click here to delete this color. RNG has given you this power.</span>
+				<% } %>
 			</li>
 		<% } %>
 		</ul>

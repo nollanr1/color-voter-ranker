@@ -25,6 +25,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
 	db.collection('colors').find().sort({votes: -1}).toArray()
 	.then(data => {
+		console.log(data)
 		res.render('index.ejs', {info: data})
 	})
 	.catch(error => console.error(error));
@@ -41,25 +42,25 @@ app.post('/newcolor', (req, res) => {
 })
 
 app.put('/vote', (req, res) => {
-	db.collection(colors).updateOne({color: req.body.color, votes: req.body.votes},{
+	db.collection('colors').updateOne({color: req.body.color, votes: Number(req.body.votes)},{
 		$set: {
-			votes:req.body.votes + 1
+			votes: (Number(req.body.votes) + 1)
 		}
 	},{
 		sort: {_id: -1},
 		upsert: true
 	})
 	.then(result => {
-		console.log(`Added one vote for color ${req.body.color}, new total is ${req.body.votes + 1}`);
+		console.log(`Added one vote for color ${req.body.color}, new total is ${Number(req.body.votes) + 1}`);
 		res.json('Vote tallied');
 	})
 	.catch(error => console.error(error));
 })
 
 app.delete('/deletecolor', (req, res) => {
-	db.collection('colors').deleteOne({color: req.body.color})
+	db.collection('colors').deleteOne({color: req.body.color, votes: Number(req.body.votes)})
 	.then(result => {
-		console.log(`Color ${req.body.color} has been annihilated`);
+		console.log(`Color ${req.body.color} has been annihilated, all ${req.body.votes} lost like tears in the rain`);
 		res.json('Color deleted');
 	})
 	.catch(error => console.error(error));
