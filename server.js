@@ -1,6 +1,7 @@
 const express = require('express');
 const { restart } = require('nodemon');
 const { response, request } = require('express');
+const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
@@ -15,6 +16,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.catch(error => console.error(error));
 
 app.set('view engine', 'ejs');
+app.use(cors);
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
