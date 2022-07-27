@@ -20,28 +20,26 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
-main {
-     display: flex;
-     justify-content: space-between;
+@media all and (min-width: 900px) {
+     main {
+          display: flex;
+          justify-content: space-between;
+     }
+     
+     aside {
+          width: 10%;
+          position: absolute;
+          right: 1%;
+          top: 0;
+     } 
 }
-
-/******************************************
-/* LAYOUT
-/*******************************************/
-aside {
-     width: 10%;
-     position: absolute;
-     right: 1%;
-     top: 0;
-}
-.colorName {
-     font-family: monospace;
-}
-
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+.colorName {
+     font-family: monospace;
+}
 ul {
      list-style: decimal-leading-zero;
 }
