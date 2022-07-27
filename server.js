@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 	.then(data => {
 		res.render('index.ejs', {info: data})
 	})
-	.catch(error => console.error(error));
+	.catch(res.send(error || 'It broke and the error is blank?')/*error => console.error(error)*/);
 })
 
 app.post('/newcolor', (req, res) => {
