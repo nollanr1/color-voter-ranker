@@ -1,5 +1,4 @@
 const express = require('express');
-//const { restart } = require('nodemon'); //This breaks Heroku, so commenting it out for non-dev work
 const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
 require('dotenv').config();
 const app = express();
@@ -19,6 +18,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 if(process.env.PORT){
 	app.use(cors);
+	console.log('CORS enabled');
 } //Use CORS if and only if this isn't localhost
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
