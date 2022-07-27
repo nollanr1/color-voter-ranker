@@ -45,3 +45,7 @@ aside {
 ul {
      list-style: decimal-leading-zero;
 }
+.colorBox{
+     border-radius: 5px;
+     border-style: solid;
+}

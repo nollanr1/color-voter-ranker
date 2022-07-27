@@ -25,7 +25,7 @@
 				<!--Normally inline CSS is bad but here I'd argue that the color is content.-->
 				<% for(let i=0; i < info.length; i++) {%>
 					<li class="colorCode">
-						<span class="colorBox" style="color: <%= info[i].color %>;">&#x25fc;</span>
+						<span class="colorBox" style="color: <%= info[i].color %>; border-color: <%= info[i].color %>; background-color: <%= info[i].color %>>;">&#x25fc;</span>
 						<span class="colorName"><%= info[i].color %></span>
 						<span class="voteCount"><%= info[i].votes %></span>
 						<button class="voteButton">Vote for this color</button>

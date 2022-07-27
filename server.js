@@ -1,5 +1,4 @@
 const express = require('express');
-//const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
 require('dotenv').config();
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
@@ -16,11 +15,6 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.catch(error => console.error(error));
 
 app.set('view engine', 'ejs');
-/*
-if(process.env.PORT){
-	app.use(cors);
-	console.log('CORS enabled');
-} //Use CORS if and only if this isn't localhost*/
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
