@@ -1,5 +1,5 @@
 const express = require('express');
-const { restart } = require('nodemon');
+//const { restart } = require('nodemon');
 const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
 require('dotenv').config();
 const app = express();
