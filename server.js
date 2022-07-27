@@ -1,5 +1,5 @@
 const express = require('express');
-//const { restart } = require('nodemon');
+//const { restart } = require('nodemon'); //This breaks Heroku, so commenting it out for non-dev work
 const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
 require('dotenv').config();
 const app = express();
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 	.then(data => {
 		res.render('index.ejs', {info: data})
 	})
-	.catch(res.send(error || 'It broke and the error is blank?')/*error => console.error(error)*/);
+	.catch(error => console.error(error))
 })
 
 app.post('/newcolor', (req, res) => {

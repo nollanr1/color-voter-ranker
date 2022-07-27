@@ -2,7 +2,7 @@
   "name": "color-ranker-crud-express-mongo",
   "version": "1.0.0",
   "description": "A server that handles the backend for the color ranker site",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
