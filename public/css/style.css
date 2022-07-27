@@ -20,23 +20,28 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
-
-body {
-
+main {
+     display: flex;
+     justify-content: space-between;
 }
-
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
-
+aside {
+     width: 10%;
+     position: absolute;
+     right: 1%;
+     top: 0;
+}
+.colorName {
+     font-family: monospace;
 }
 
-footer {
-
-}
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+ul {
+     list-style: decimal-leading-zero;
+}

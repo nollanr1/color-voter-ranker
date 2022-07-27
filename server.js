@@ -1,6 +1,6 @@
 const express = require('express');
 const { restart } = require('nodemon');
-//const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
+const cors = require('cors'); //TODO: Figure out if I actually need CORS or not, since it seems to break my dev build...
 require('dotenv').config();
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
@@ -17,7 +17,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.catch(error => console.error(error));
 
 app.set('view engine', 'ejs');
-//app.use(cors); //TODO: See CORS note above on line 3
+if(process.env.PORT){
+	app.use(cors);
+} //Use CORS if and only if this isn't localhost
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -25,7 +27,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
 	db.collection('colors').find().sort({votes: -1}).toArray()
 	.then(data => {
-		console.log(data)
 		res.render('index.ejs', {info: data})
 	})
 	.catch(error => console.error(error));
@@ -60,7 +61,7 @@ app.put('/vote', (req, res) => {
 app.delete('/deletecolor', (req, res) => {
 	db.collection('colors').deleteOne({color: req.body.color, votes: Number(req.body.votes)})
 	.then(result => {
-		console.log(`Color ${req.body.color} has been annihilated, all ${req.body.votes} lost like tears in the rain`);
+		console.log(`Color ${req.body.color} has been annihilated, all ${req.body.votes} votes lost like tears in the rain`);
 		res.json('Color deleted');
 	})
 	.catch(error => console.error(error));

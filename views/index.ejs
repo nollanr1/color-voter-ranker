@@ -14,26 +14,40 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<h1>Under Construction</h1>
-		<form action="/newcolor" method="POST">
-			<input type="color" placeholder="color" name="color">
-			<button type="submit">Choose this color</button>
-		</form>
-		<ul class="colorCodes">
-		<!--Normally inline CSS is bad but here I'd argue that the color is content.-->
-		<% for(let i=0; i < info.length; i++) {%>
-			<li class="colorCode">
-				<span class="colorBox" style="color: <%= info[i].color %>;">&#x25fc;</span>
-				<span><%= info[i].color %></span>
-				<span><%= info[i].votes %></span>
-				<span class="voteButton">Vote for this color</span>
-				<% if(Math.ceil(Math.random()*1)==1) {%>
-					<!--The *1 is a placeholder for actual odds, normally I'd do 300 or so-->
-					<span class="deleteButton">If you want, click here to delete this color. RNG has given you this power.</span>
+		<h1>Color Rankings</h1>
+		<main>
+			<section>
+				<form action="/newcolor" method="POST">
+					<input type="color" placeholder="color" name="color">
+					<button type="submit">Add this color</button>
+				</form>
+				<ul class="colorCodes">
+				<!--Normally inline CSS is bad but here I'd argue that the color is content.-->
+				<% for(let i=0; i < info.length; i++) {%>
+					<li class="colorCode">
+						<span class="colorBox" style="color: <%= info[i].color %>;">&#x25fc;</span>
+						<span class="colorName"><%= info[i].color %></span>
+						<span class="voteCount"><%= info[i].votes %></span>
+						<button class="voteButton">Vote for this color</button>
+						<% if(Math.ceil(Math.random()*30)==1) {%>
+							<!--I have no idea how to make reasonable odds but I don't expect this website to get much traffic.-->
+							<!--Quite frankly, normally I'd make deletion an admin-only thing but the way it is now is somewhat required.-->
+							<button class="deleteButton">If you want, click here to delete this color. RNG has given you this power.</button>
+						<% } %>
+					</li>
 				<% } %>
-			</li>
-		<% } %>
-		</ul>
+				</ul>
+			</section>
+			<aside>
+				<!--This is a crime against good web design-->
+				<!--But once again, I'd argue this is content.-->
+				<% const topRanks = 10 %>
+				<% let topVoteSum = info.slice(0, topRanks).reduce((a,b)=> a + Number(b.votes), 0) %>
+				<% for(let i=0; i<info.length && i<topRanks; i++) { %>
+					<div class="barChunk" style="background-color: <%= info[i].color %>; height: <%= info[i].votes/topVoteSum*100 %>vh;"></div>
+				<% } %>
+			</aside>
+		</main>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

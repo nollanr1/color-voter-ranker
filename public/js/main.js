@@ -19,7 +19,7 @@ async function deleteColor(){
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
 				color: hexVal,
-				//votes: numVotes
+				votes: numVotes
 			})
 		})
 		const data = await res.json()
